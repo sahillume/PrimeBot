@@ -312,6 +312,9 @@ async function startBot() {
       // Initialize anti-call feature
       handler.initializeAntiCall(sock);
 
+      // Initialize antidelete feature
+      handler.initializeAntiDelete(sock);
+
       // Cleanup old chats (keep only active ones, e.g., last touched <1 day)
       const now = Date.now();
       for (const [jid, chatMsgs] of store.messages.entries()) {
