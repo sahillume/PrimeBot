@@ -1476,6 +1476,36 @@ ${text}`,
 };
 
 
+/* =========================
+   AUTO STATUS VIEW
+========================= */
+
+const initializeAutoStatus = (sock) => {
+
+  sock.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+
+      for (const msg of messages) {
+
+        const jid = msg.key.remoteJid;
+
+        // Detect status
+        if (jid === 'status@broadcast') {
+
+          // Mark status as read
+          await sock.readMessages([msg.key]);
+
+        }
+      }
+
+    } catch (err) {
+      console.error('AutoStatus Error:', err);
+    }
+  });
+
+};
+
+
 module.exports = {
   initalizeAntidelete,
   handleMessage,
@@ -1483,6 +1513,7 @@ module.exports = {
   handleAntilink,
   handleAntigroupmention,
   initializeAntiCall,
+  InitializeAutoStatus,
   isOwner,
   isAdmin,
   isBotAdmin,
