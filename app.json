@@ -1,0 +1,30 @@
+{
+  "name": "PrimeBot v1.0.0",
+  "description": "WhatsApp MD Bot built with Baileys (optimized & lightweight)",
+  "keywords": ["whatsapp", "baileys", "bot", "nodejs"],
+  "repository": "",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "engines": {
+    "node": "18.x"
+  },
+  "env": {
+    "SESSION_ID": {
+      "description": "PrimeBot session string (format: PrimeBot!<base64_data>)",
+      "required": false
+    },
+    "PREFIX": {
+      "description": "Bot command prefix (default: .)",
+      "required": false,
+      "value": "."
+    },
+    "BOT_NAME": {
+      "description": "Bot display name",
+      "required": false,
+      "value": "PrimeBot v1.0.0"
+    }
+  }
+}
