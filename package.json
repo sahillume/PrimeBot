@@ -1,0 +1,70 @@
+{
+  "name": "PrimeBot",
+  "version": "1.0.0",
+  "description": "PrimeBot - Sahil Pro WhatsApp MD Bot built with Baileys",
+  "main": "index.js",
+  "type": "commonjs",
+
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+
+    "setup": "npm install && npm run postinstall",
+    "postinstall": "echo Bot installed successfully",
+
+    "install:no-puppeteer": "PUPPETEER_SKIP_DOWNLOAD=true PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install",
+
+    "clean": "rm -rf node_modules package-lock.json && npm install"
+  },
+
+  "keywords": [
+    "mathithibala bot",
+    "whatsapp bot",
+    "baileys",
+    "sahil pro",
+    "md bot"
+  ],
+
+  "author": "Professor Sahil",
+  "license": "MIT",
+
+  "engines": {
+    "node": ">=18.0.0"
+  },
+
+  "dependencies": {
+    "@bochilteam/scraper": "^5.0.1",
+    "@bochilteam/scraper-tiktok": "^5.0.0",
+    "@bochilteam/scraper-facebook": "^5.0.0",
+    "@vitalets/google-translate-api": "^9.2.1",
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+
+    "axios": "^1.7.2",
+    "canvas": "^3.2.1",
+    "cheerio": "^1.0.0-rc.12",
+
+    "ffmpeg-static": "^5.3.0",
+    "fluent-ffmpeg": "^2.1.3",
+
+    "file-type": "^16.5.4",
+    "form-data": "^4.0.0",
+
+    "jimp": "^1.6.0",
+    "moment-timezone": "^0.5.45",
+
+    "node-fetch": "^2.7.0",
+    "node-webpmux": "^3.1.7",
+
+    "pino": "^9.0.0",
+    "qrcode": "^1.5.3",
+    "qrcode-terminal": "^0.12.0",
+
+    "sharp": "^0.33.4",
+    "yt-search": "^2.13.1",
+    "ytdl-core": "^4.11.5"
+  },
+
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
