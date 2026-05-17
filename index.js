@@ -312,12 +312,6 @@ async function startBot() {
       // Initialize anti-call feature
       handler.initializeAntiCall(sock);
 
-      // Initialize antidelete feature
-      handler.initializeAntiDelete(sock);
-
-      // Initialize auto status view
-      handler.initializeAutoStatus(sock);
-
       // Cleanup old chats (keep only active ones, e.g., last touched <1 day)
       const now = Date.now();
       for (const [jid, chatMsgs] of store.messages.entries()) {
@@ -461,7 +455,7 @@ async function startBot() {
   return sock;
 }
 // Start the bot
-console.log('🚀 Starting PrimeBot...\n');
+console.log('🚀 Starting WhatsApp MD Bot...\n');
 console.log(`📦 Bot Name: ${config.botName}`);
 console.log(`⚡ Prefix: ${config.prefix}`);
 const ownerNames = Array.isArray(config.ownerName) ? config.ownerName.join(',') : config.ownerName;
