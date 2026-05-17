@@ -1393,127 +1393,12 @@ const initializeAntiCall = (sock) => {
   });
 };
 
-
-/* =========================
-   ANTI DELETE
-========================= */
-
-const deletedMessages = new Map();
-
-const initializeAntiDelete = (sock) => {
-
-  // Store messages first
-  sock.ev.on('messages.upsert', ({ messages }) => {
-    for (const msg of messages) {
-      if (!msg.key?.id) continue;
-
-      deletedMessages.set(msg.key.id, {
-        message: msg,
-        timestamp: Date.now()
-      });
-    }
-
-    // Auto cleanup old messages every insert
-    if (deletedMessages.size > 5000) {
-      const oldest = deletedMessages.keys().next().value;
-      deletedMessages.delete(oldest);
-    }
-  });
-
-  // Detect deleted messages
-  sock.ev.on('messages.update', async (updates) => {
-    try {
-      for (const update of updates) {
-
-        // Deleted message
-        if (
-          update.update?.message === null ||
-          update.update?.messageStubType === 1
-        ) {
-
-          const key = update.key;
-          const saved = deletedMessages.get(key.id);
-
-          if (!saved) continue;
-
-          const originalMsg = saved.message;
-          const from = key.remoteJid;
-
-          // Ignore system chats
-          if (
-            from.includes('@broadcast') ||
-            from.includes('@newsletter')
-          ) continue;
-
-          const sender =
-            originalMsg.key.participant ||
-            originalMsg.key.remoteJid;
-
-          let text =
-            originalMsg.message?.conversation ||
-            originalMsg.message?.extendedTextMessage?.text ||
-            originalMsg.message?.imageMessage?.caption ||
-            originalMsg.message?.videoMessage?.caption ||
-            '[Media]';
-
-          await sock.sendMessage(from, {
-            text:
-`🚨 *ANTI DELETE DETECTED*
-
-👤 User: @${sender.split('@')[0]}
-
-📝 Message:
-${text}`,
-            mentions: [sender]
-          });
-
-        }
-      }
-    } catch (err) {
-      console.error('AntiDelete Error:', err);
-    }
-  });
-};
-
-
-/* =========================
-   AUTO STATUS VIEW
-========================= */
-
-const initializeAutoStatus = (sock) => {
-
-  sock.ev.on('messages.upsert', async ({ messages }) => {
-    try {
-
-      for (const msg of messages) {
-
-        const jid = msg.key.remoteJid;
-
-        // Detect status
-        if (jid === 'status@broadcast') {
-
-          // Mark status as read
-          await sock.readMessages([msg.key]);
-
-        }
-      }
-
-    } catch (err) {
-      console.error('AutoStatus Error:', err);
-    }
-  });
-
-};
-
-
 module.exports = {
-  initalizeAntidelete,
   handleMessage,
   handleGroupUpdate,
   handleAntilink,
   handleAntigroupmention,
   initializeAntiCall,
-  InitializeAutoStatus,
   isOwner,
   isAdmin,
   isBotAdmin,
