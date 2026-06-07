@@ -1,4 +1,3 @@
-https://rl.katabump.fr/3dcf50
 <div align="center">
 
 <img src="utils/bot_image.jpg" width="200" style="border-radius:50%" />
@@ -11,6 +10,7 @@ https://rl.katabump.fr/3dcf50
 
 <p align="center">
 
+https://rl.katabump.fr/3dcf50
 <img src="https://img.shields.io/badge/Version-v1.0.0-blue?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Node.js-18+-green?style=for-the-badge&logo=node.js" />
 <img src="https://img.shields.io/badge/Baileys-MD-orange?style=for-the-badge" />
